@@ -14,6 +14,15 @@
   changes how a spliced `RawValue` is rendered: as JSON, rather than
   HTML-escaped through its `Display` implementation.
   [#XXX](https://github.com/lambda-fairy/maud/pull/XXX)
+- **Breaking:** escape `<script>` and `<style>` bodies for what they are.
+  String literals are emitted unescaped, a splice in an executable script must
+  be a `TrustedScript` (in a `style`, a `TrustedStyle`), and JSON goes in
+  `script type="application/json"`. A body that would end its element early is
+  a compile error, or a panic at run time. `script type="text/template"` keeps
+  the old escaping. `script` and `style` inside `svg`, `math`, `textarea`,
+  `title` and similar elements are a compile error, and so is a string literal
+  attribute name that the browser would split, such as `"defer type"`.
+  [#181](https://github.com/lambda-fairy/maud/issues/181)
 
 ## [0.27.0] - 2025-02-02
 

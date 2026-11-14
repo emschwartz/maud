@@ -1,0 +1,283 @@
+error: `script` is not supported inside `svg`
+  --> tests/warnings/raw-text-foreign.rs:11:15
+   |
+11 |         svg { script { (user) } }
+   |               ^^^^^^
+   |
+   = help: move the `script` outside the `svg` element
+
+error: `script` is not supported inside `svg`
+  --> tests/warnings/raw-text-foreign.rs:13:32
+   |
+13 |         svg { @for _ in 0..2 { script { (user) } b {} } }
+   |                                ^^^^^^
+   |
+   = help: move the `script` outside the `svg` element
+
+error: `style` is not supported inside `svg`
+  --> tests/warnings/raw-text-foreign.rs:15:43
+   |
+15 |         svg { @while { i += 1; i <= 2 } { style { (user) } script { (user) } p {} } }
+   |                                           ^^^^^
+   |
+   = help: move the `style` outside the `svg` element
+
+error: `script` is not supported inside `svg`
+  --> tests/warnings/raw-text-foreign.rs:15:60
+   |
+15 |         svg { @while { i += 1; i <= 2 } { style { (user) } script { (user) } p {} } }
+   |                                                            ^^^^^^
+   |
+   = help: move the `script` outside the `svg` element
+
+error: `script` is not supported inside `svg`
+  --> tests/warnings/raw-text-foreign.rs:17:22
+   |
+17 |         svg { (para) script { (user) } }
+   |                      ^^^^^^
+   |
+   = help: move the `script` outside the `svg` element
+
+error: `script` is not supported inside `svg`
+  --> tests/warnings/raw-text-foreign.rs:19:24
+   |
+19 |         select { svg { script { (user) } } }
+   |                        ^^^^^^
+   |
+   = help: move the `script` outside the `svg` element
+
+error: `script` is not supported inside `math`
+  --> tests/warnings/raw-text-foreign.rs:20:34
+   |
+20 |         select { option { math { script { (user) } } } }
+   |                                  ^^^^^^
+   |
+   = help: move the `script` outside the `math` element
+
+error: `script` is not supported inside `svg`
+  --> tests/warnings/raw-text-foreign.rs:22:45
+   |
+22 |         math { svg { foreignObject { p {} } script { (user) } } }
+   |                                             ^^^^^^
+   |
+   = help: move the `script` outside the `svg` element
+
+error: `style` is not supported inside `math`
+  --> tests/warnings/raw-text-foreign.rs:23:38
+   |
+23 |         math { svg { desc { b {} } } style { "x" } script { (user) } }
+   |                                      ^^^^^
+   |
+   = help: move the `style` outside the `math` element
+
+error: `script` is not supported inside `math`
+  --> tests/warnings/raw-text-foreign.rs:23:52
+   |
+23 |         math { svg { desc { b {} } } style { "x" } script { (user) } }
+   |                                                    ^^^^^^
+   |
+   = help: move the `script` outside the `math` element
+
+error: `script` is not supported inside `svg`
+  --> tests/warnings/raw-text-foreign.rs:24:59
+   |
+24 |         math { mi { mglyph { svg { foreignObject { p {} } script { (user) } } } } }
+   |                                                           ^^^^^^
+   |
+   = help: move the `script` outside the `svg` element
+
+error: `script` is not supported inside `math`
+  --> tests/warnings/raw-text-foreign.rs:26:33
+   |
+26 |         math { mtext { mglyph { script { (code) } } } }
+   |                                 ^^^^^^
+   |
+   = help: move the `script` outside the `math` element
+
+error: `script` is not supported inside `svg`
+  --> tests/warnings/raw-text-foreign.rs:27:38
+   |
+27 |         math { svg { foreignObject { script { (code) } } } }
+   |                                      ^^^^^^
+   |
+   = help: move the `script` outside the `svg` element
+
+error[E0277]: `String` cannot be spliced into this element body (`Script`)
+  --> tests/warnings/raw-text-foreign.rs:11:25
+   |
+11 |         svg { script { (user) } }
+   |                         ^^^^ not allowed in this `<script>` or `<style>` body
+   |
+   = help: the trait `RenderIn<Script>` is not implemented for `String`
+   = note: an executable `<script>` only accepts `TrustedScript`, and a `<style>` only accepts `TrustedStyle`
+   = note: to pass data to a script, put it in `script type="application/json" { (Json(..)) }` and read it with `JSON.parse(element.textContent)`
+help: the trait `RenderIn<Script>` is implemented for `TrustedScript`
+  --> /workspace/maud/src/ctx.rs:160:8
+  ::: /workspace/maud/src/ctx.rs:174:1
+   |
+   = note: in this macro invocation
+note: required by a bound in `maud::macro_private::render_in`
+  --> /workspace/maud/src/lib.rs:452:4
+   = note: this error originates in the macro `trusted_type` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `String` cannot be spliced into this element body (`Script`)
+  --> tests/warnings/raw-text-foreign.rs:13:42
+   |
+13 |         svg { @for _ in 0..2 { script { (user) } b {} } }
+   |                                          ^^^^ not allowed in this `<script>` or `<style>` body
+   |
+   = help: the trait `RenderIn<Script>` is not implemented for `String`
+   = note: an executable `<script>` only accepts `TrustedScript`, and a `<style>` only accepts `TrustedStyle`
+   = note: to pass data to a script, put it in `script type="application/json" { (Json(..)) }` and read it with `JSON.parse(element.textContent)`
+help: the trait `RenderIn<Script>` is implemented for `TrustedScript`
+  --> /workspace/maud/src/ctx.rs:160:8
+  ::: /workspace/maud/src/ctx.rs:174:1
+   |
+   = note: in this macro invocation
+note: required by a bound in `maud::macro_private::render_in`
+  --> /workspace/maud/src/lib.rs:452:4
+   = note: this error originates in the macro `trusted_type` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `String` cannot be spliced into this element body (`Style`)
+  --> tests/warnings/raw-text-foreign.rs:15:52
+   |
+15 |         svg { @while { i += 1; i <= 2 } { style { (user) } script { (user) } p {} } }
+   |                                                    ^^^^ not allowed in this `<script>` or `<style>` body
+   |
+   = help: the trait `RenderIn<Style>` is not implemented for `String`
+   = note: an executable `<script>` only accepts `TrustedScript`, and a `<style>` only accepts `TrustedStyle`
+   = note: to pass data to a script, put it in `script type="application/json" { (Json(..)) }` and read it with `JSON.parse(element.textContent)`
+help: the trait `RenderIn<Style>` is implemented for `TrustedStyle`
+  --> /workspace/maud/src/ctx.rs:160:8
+  ::: /workspace/maud/src/ctx.rs:182:1
+   |
+   = note: in this macro invocation
+note: required by a bound in `maud::macro_private::render_in`
+  --> /workspace/maud/src/lib.rs:452:4
+   = note: this error originates in the macro `trusted_type` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `String` cannot be spliced into this element body (`Script`)
+  --> tests/warnings/raw-text-foreign.rs:15:70
+   |
+15 |         svg { @while { i += 1; i <= 2 } { style { (user) } script { (user) } p {} } }
+   |                                                                      ^^^^ not allowed in this `<script>` or `<style>` body
+   |
+   = help: the trait `RenderIn<Script>` is not implemented for `String`
+   = note: an executable `<script>` only accepts `TrustedScript`, and a `<style>` only accepts `TrustedStyle`
+   = note: to pass data to a script, put it in `script type="application/json" { (Json(..)) }` and read it with `JSON.parse(element.textContent)`
+help: the trait `RenderIn<Script>` is implemented for `TrustedScript`
+  --> /workspace/maud/src/ctx.rs:160:8
+  ::: /workspace/maud/src/ctx.rs:174:1
+   |
+   = note: in this macro invocation
+note: required by a bound in `maud::macro_private::render_in`
+  --> /workspace/maud/src/lib.rs:452:4
+   = note: this error originates in the macro `trusted_type` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `String` cannot be spliced into this element body (`Script`)
+  --> tests/warnings/raw-text-foreign.rs:17:32
+   |
+17 |         svg { (para) script { (user) } }
+   |                                ^^^^ not allowed in this `<script>` or `<style>` body
+   |
+   = help: the trait `RenderIn<Script>` is not implemented for `String`
+   = note: an executable `<script>` only accepts `TrustedScript`, and a `<style>` only accepts `TrustedStyle`
+   = note: to pass data to a script, put it in `script type="application/json" { (Json(..)) }` and read it with `JSON.parse(element.textContent)`
+help: the trait `RenderIn<Script>` is implemented for `TrustedScript`
+  --> /workspace/maud/src/ctx.rs:160:8
+  ::: /workspace/maud/src/ctx.rs:174:1
+   |
+   = note: in this macro invocation
+note: required by a bound in `maud::macro_private::render_in`
+  --> /workspace/maud/src/lib.rs:452:4
+   = note: this error originates in the macro `trusted_type` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `String` cannot be spliced into this element body (`Script`)
+  --> tests/warnings/raw-text-foreign.rs:19:34
+   |
+19 |         select { svg { script { (user) } } }
+   |                                  ^^^^ not allowed in this `<script>` or `<style>` body
+   |
+   = help: the trait `RenderIn<Script>` is not implemented for `String`
+   = note: an executable `<script>` only accepts `TrustedScript`, and a `<style>` only accepts `TrustedStyle`
+   = note: to pass data to a script, put it in `script type="application/json" { (Json(..)) }` and read it with `JSON.parse(element.textContent)`
+help: the trait `RenderIn<Script>` is implemented for `TrustedScript`
+  --> /workspace/maud/src/ctx.rs:160:8
+  ::: /workspace/maud/src/ctx.rs:174:1
+   |
+   = note: in this macro invocation
+note: required by a bound in `maud::macro_private::render_in`
+  --> /workspace/maud/src/lib.rs:452:4
+   = note: this error originates in the macro `trusted_type` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `String` cannot be spliced into this element body (`Script`)
+  --> tests/warnings/raw-text-foreign.rs:20:44
+   |
+20 |         select { option { math { script { (user) } } } }
+   |                                            ^^^^ not allowed in this `<script>` or `<style>` body
+   |
+   = help: the trait `RenderIn<Script>` is not implemented for `String`
+   = note: an executable `<script>` only accepts `TrustedScript`, and a `<style>` only accepts `TrustedStyle`
+   = note: to pass data to a script, put it in `script type="application/json" { (Json(..)) }` and read it with `JSON.parse(element.textContent)`
+help: the trait `RenderIn<Script>` is implemented for `TrustedScript`
+  --> /workspace/maud/src/ctx.rs:160:8
+  ::: /workspace/maud/src/ctx.rs:174:1
+   |
+   = note: in this macro invocation
+note: required by a bound in `maud::macro_private::render_in`
+  --> /workspace/maud/src/lib.rs:452:4
+   = note: this error originates in the macro `trusted_type` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `String` cannot be spliced into this element body (`Script`)
+  --> tests/warnings/raw-text-foreign.rs:22:55
+   |
+22 |         math { svg { foreignObject { p {} } script { (user) } } }
+   |                                                       ^^^^ not allowed in this `<script>` or `<style>` body
+   |
+   = help: the trait `RenderIn<Script>` is not implemented for `String`
+   = note: an executable `<script>` only accepts `TrustedScript`, and a `<style>` only accepts `TrustedStyle`
+   = note: to pass data to a script, put it in `script type="application/json" { (Json(..)) }` and read it with `JSON.parse(element.textContent)`
+help: the trait `RenderIn<Script>` is implemented for `TrustedScript`
+  --> /workspace/maud/src/ctx.rs:160:8
+  ::: /workspace/maud/src/ctx.rs:174:1
+   |
+   = note: in this macro invocation
+note: required by a bound in `maud::macro_private::render_in`
+  --> /workspace/maud/src/lib.rs:452:4
+   = note: this error originates in the macro `trusted_type` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `String` cannot be spliced into this element body (`Script`)
+  --> tests/warnings/raw-text-foreign.rs:23:62
+   |
+23 |         math { svg { desc { b {} } } style { "x" } script { (user) } }
+   |                                                              ^^^^ not allowed in this `<script>` or `<style>` body
+   |
+   = help: the trait `RenderIn<Script>` is not implemented for `String`
+   = note: an executable `<script>` only accepts `TrustedScript`, and a `<style>` only accepts `TrustedStyle`
+   = note: to pass data to a script, put it in `script type="application/json" { (Json(..)) }` and read it with `JSON.parse(element.textContent)`
+help: the trait `RenderIn<Script>` is implemented for `TrustedScript`
+  --> /workspace/maud/src/ctx.rs:160:8
+  ::: /workspace/maud/src/ctx.rs:174:1
+   |
+   = note: in this macro invocation
+note: required by a bound in `maud::macro_private::render_in`
+  --> /workspace/maud/src/lib.rs:452:4
+   = note: this error originates in the macro `trusted_type` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `String` cannot be spliced into this element body (`Script`)
+  --> tests/warnings/raw-text-foreign.rs:24:69
+   |
+24 |         math { mi { mglyph { svg { foreignObject { p {} } script { (user) } } } } }
+   |                                                                     ^^^^ not allowed in this `<script>` or `<style>` body
+   |
+   = help: the trait `RenderIn<Script>` is not implemented for `String`
+   = note: an executable `<script>` only accepts `TrustedScript`, and a `<style>` only accepts `TrustedStyle`
+   = note: to pass data to a script, put it in `script type="application/json" { (Json(..)) }` and read it with `JSON.parse(element.textContent)`
+help: the trait `RenderIn<Script>` is implemented for `TrustedScript`
+  --> /workspace/maud/src/ctx.rs:160:8
+  ::: /workspace/maud/src/ctx.rs:174:1
+   |
+   = note: in this macro invocation
+note: required by a bound in `maud::macro_private::render_in`
+  --> /workspace/maud/src/lib.rs:452:4
+   = note: this error originates in the macro `trusted_type` (in Nightly builds, run with -Z macro-backtrace for more info)

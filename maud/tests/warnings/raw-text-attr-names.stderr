@@ -1,0 +1,143 @@
+error: attribute name " type " contains ' '
+ --> tests/warnings/raw-text-attr-names.rs:9:16
+  |
+9 |         script " type "="text/javascript" type="text/template" { (user) }
+  |                ^^^^^^^^
+  |
+  = note: the browser would split this name into several attributes
+
+error: attribute name "defer type" contains ' '
+  --> tests/warnings/raw-text-attr-names.rs:10:16
+   |
+10 |         script "defer type"="module" type="text/template" { (user) }
+   |                ^^^^^^^^^^^^
+   |
+   = note: the browser would split this name into several attributes
+
+error: attribute name "type " contains ' '
+  --> tests/warnings/raw-text-attr-names.rs:11:16
+   |
+11 |         script "type "="module" type="text/template" { (user) }
+   |                ^^^^^^^
+   |
+   = note: the browser would split this name into several attributes
+
+error: attribute name "type=module" contains '='
+  --> tests/warnings/raw-text-attr-names.rs:12:16
+   |
+12 |         script "type=module" type="text/template" { (user) }
+   |                ^^^^^^^^^^^^^
+   |
+   = note: the browser would split this name into several attributes
+
+error: attribute name "type/" contains '/'
+  --> tests/warnings/raw-text-attr-names.rs:13:16
+   |
+13 |         script "type/" type="text/template" { (user) }
+   |                ^^^^^^^
+   |
+   = note: the browser would split this name into several attributes
+
+error: attribute name "data-x type" contains ' '
+  --> tests/warnings/raw-text-attr-names.rs:14:16
+   |
+14 |         script data-"x type"="" type="text/x-template" { (user) }
+   |                ^^^^^^^^^^^^^
+   |
+   = note: the browser would split this name into several attributes
+
+error: attribute name "x type=importmap y" contains ' '
+  --> tests/warnings/raw-text-attr-names.rs:15:16
+   |
+15 |         script "x type=importmap y"="" type="text/template" {}
+   |                ^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: the browser would split this name into several attributes
+
+error: attribute name "a/type" contains '/'
+  --> tests/warnings/raw-text-attr-names.rs:16:16
+   |
+16 |         script "a/type"="module" type="text/template" {}
+   |                ^^^^^^^^
+   |
+   = note: the browser would split this name into several attributes
+
+error: attribute name "type\t" contains '\t'
+  --> tests/warnings/raw-text-attr-names.rs:17:16
+   |
+17 |         script "type\t"="module" type="text/template" {}
+   |                ^^^^^^^^
+   |
+   = note: the browser would split this name into several attributes
+
+error: attribute name "type\n" contains '\n'
+  --> tests/warnings/raw-text-attr-names.rs:18:16
+   |
+18 |         script "type\n"="module" type="text/template" {}
+   |                ^^^^^^^^
+   |
+   = note: the browser would split this name into several attributes
+
+error: attribute name "type\r" contains '\r'
+  --> tests/warnings/raw-text-attr-names.rs:19:16
+   |
+19 |         script "type\r"="module" type="text/template" {}
+   |                ^^^^^^^^
+   |
+   = note: the browser would split this name into several attributes
+
+error: attribute name "type\u{c}" contains '\u{c}'
+  --> tests/warnings/raw-text-attr-names.rs:20:16
+   |
+20 |         script "type\x0c"="module" type="text/template" {}
+   |                ^^^^^^^^^^
+   |
+   = note: the browser would split this name into several attributes
+
+error: attribute name "a>b" contains '>'
+  --> tests/warnings/raw-text-attr-names.rs:21:16
+   |
+21 |         script "a>b"="" {}
+   |                ^^^^^
+   |
+   = note: the browser would split this name into several attributes
+
+error: attribute name "a\"b" contains '"'
+  --> tests/warnings/raw-text-attr-names.rs:22:16
+   |
+22 |         script "a\"b"="" {}
+   |                ^^^^^^
+   |
+   = note: the browser would split this name into several attributes
+
+error: attribute name "a'b" contains '\''
+  --> tests/warnings/raw-text-attr-names.rs:23:16
+   |
+23 |         script "a'b"="" {}
+   |                ^^^^^
+   |
+   = note: the browser would split this name into several attributes
+
+error: attribute name "a<b" contains '<'
+  --> tests/warnings/raw-text-attr-names.rs:24:16
+   |
+24 |         script "a<b"="" {}
+   |                ^^^^^
+   |
+   = note: the browser would split this name into several attributes
+
+error: attribute name "a\0b" contains '\0'
+  --> tests/warnings/raw-text-attr-names.rs:25:16
+   |
+25 |         script "a\0b"="" {}
+   |                ^^^^^^
+   |
+   = note: the browser would split this name into several attributes
+
+error: attribute name "x onclick" contains ' '
+  --> tests/warnings/raw-text-attr-names.rs:30:13
+   |
+30 |         div "x onclick"="alert(1)" {}
+   |             ^^^^^^^^^^^
+   |
+   = note: the browser would split this name into several attributes

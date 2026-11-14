@@ -27,9 +27,9 @@ fn render_value_parse_escaped_chars() {
 #[test]
 fn render_value_cannot_break_out_of_script_tag() {
     let value = json!({ "html": EXAMPLE_HTML });
-    let observed = html! { script { (value) } }.into_string();
+    let observed = html! { script type="application/json" { (value) } }.into_string();
     assert_eq!(
-        format!("<script>{{\"html\":{EXAMPLE_HTML_JSON}}}</script>"),
+        format!(r#"<script type="application/json">{{"html":{EXAMPLE_HTML_JSON}}}</script>"#),
         observed,
     );
 }
@@ -61,9 +61,9 @@ struct Html<'a> {
 #[test]
 fn render_wrapper_cannot_break_out_of_script_tag() {
     let value = Json(Html { html: EXAMPLE_HTML });
-    let observed = html! { script { (value) } }.into_string();
+    let observed = html! { script type="application/json" { (value) } }.into_string();
     assert_eq!(
-        format!("<script>{{\"html\":{EXAMPLE_HTML_JSON}}}</script>"),
+        format!(r#"<script type="application/json">{{"html":{EXAMPLE_HTML_JSON}}}</script>"#),
         observed,
     );
 }
@@ -96,9 +96,9 @@ pub mod raw_value {
     #[test]
     fn render_raw_value_cannot_break_out_of_script_tag() {
         let value = to_raw_value(&json!({ "html": EXAMPLE_HTML })).unwrap();
-        let observed = html! { script { (value) } }.into_string();
+        let observed = html! { script type="application/json" { (value) } }.into_string();
         assert_eq!(
-            format!("<script>{{\"html\":{EXAMPLE_HTML_JSON}}}</script>"),
+            format!(r#"<script type="application/json">{{"html":{EXAMPLE_HTML_JSON}}}</script>"#),
             observed,
         );
     }

@@ -1,0 +1,31 @@
+error: attribute name "type " contains ' '
+ --> tests/warnings-json/raw-text-json-attr-names.rs:7:16
+  |
+7 |         script "type "="importmap" type="application/json" { (Json(&user)) }
+  |                ^^^^^^^
+  |
+  = note: the browser would split this name into several attributes
+
+error: attribute name "x type=importmap y" contains ' '
+ --> tests/warnings-json/raw-text-json-attr-names.rs:8:16
+  |
+8 |         script "x type=importmap y"="" type="application/json" { (Json(&user)) }
+  |                ^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: the browser would split this name into several attributes
+
+error: attribute name "a/type" contains '/'
+ --> tests/warnings-json/raw-text-json-attr-names.rs:9:16
+  |
+9 |         script "a/type"="module" type="application/json" { (Json(&user)) }
+  |                ^^^^^^^^
+  |
+  = note: the browser would split this name into several attributes
+
+error: attribute name "type=text/javascript" contains '='
+  --> tests/warnings-json/raw-text-json-attr-names.rs:10:16
+   |
+10 |         script "type=text/javascript" type="application/json" {
+   |                ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: the browser would split this name into several attributes

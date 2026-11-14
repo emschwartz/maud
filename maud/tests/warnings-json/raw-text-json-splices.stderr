@@ -1,0 +1,175 @@
+error[E0277]: `Json<{integer}>` cannot be spliced into this element body (`Script`)
+ --> tests/warnings-json/raw-text-json-splices.rs:8:19
+  |
+8 |         script { (Json(1)) }
+  |                   ^^^^^^^ not allowed in this `<script>` or `<style>` body
+  |
+  = note: an executable `<script>` only accepts `TrustedScript`, and a `<style>` only accepts `TrustedStyle`
+  = note: to pass data to a script, put it in `script type="application/json" { (Json(..)) }` and read it with `JSON.parse(element.textContent)`
+help: the trait `RenderIn<Script>` is not implemented for `Json<{integer}>`
+      but trait `RenderIn<JsonScript>` is implemented for it
+ --> /workspace/maud/src/json.rs:182:12
+ ::: /workspace/maud/src/json.rs:196:1
+  |
+  = note: in this macro invocation
+  = help: for that trait implementation, expected `JsonScript`, found `Script`
+note: required by a bound in `maud::macro_private::render_in`
+ --> /workspace/maud/src/lib.rs:452:4
+  = note: this error originates in the macro `impl_render_in_json_script` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `Json<{integer}>` cannot be spliced into this element body (`Script`)
+ --> tests/warnings-json/raw-text-json-splices.rs:9:42
+  |
+9 |         script type="TEXT/JAVASCRIPT" { (Json(1)) }
+  |                                          ^^^^^^^ not allowed in this `<script>` or `<style>` body
+  |
+  = note: an executable `<script>` only accepts `TrustedScript`, and a `<style>` only accepts `TrustedStyle`
+  = note: to pass data to a script, put it in `script type="application/json" { (Json(..)) }` and read it with `JSON.parse(element.textContent)`
+help: the trait `RenderIn<Script>` is not implemented for `Json<{integer}>`
+      but trait `RenderIn<JsonScript>` is implemented for it
+ --> /workspace/maud/src/json.rs:182:12
+ ::: /workspace/maud/src/json.rs:196:1
+  |
+  = note: in this macro invocation
+  = help: for that trait implementation, expected `JsonScript`, found `Script`
+note: required by a bound in `maud::macro_private::render_in`
+ --> /workspace/maud/src/lib.rs:452:4
+  = note: this error originates in the macro `impl_render_in_json_script` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `Json<{integer}>` cannot be spliced into this element body (`Script`)
+  --> tests/warnings-json/raw-text-json-splices.rs:10:33
+   |
+10 |         script type="module" { (Json(1)) }
+   |                                 ^^^^^^^ not allowed in this `<script>` or `<style>` body
+   |
+   = note: an executable `<script>` only accepts `TrustedScript`, and a `<style>` only accepts `TrustedStyle`
+   = note: to pass data to a script, put it in `script type="application/json" { (Json(..)) }` and read it with `JSON.parse(element.textContent)`
+help: the trait `RenderIn<Script>` is not implemented for `Json<{integer}>`
+      but trait `RenderIn<JsonScript>` is implemented for it
+  --> /workspace/maud/src/json.rs:182:12
+  ::: /workspace/maud/src/json.rs:196:1
+   |
+   = note: in this macro invocation
+   = help: for that trait implementation, expected `JsonScript`, found `Script`
+note: required by a bound in `maud::macro_private::render_in`
+  --> /workspace/maud/src/lib.rs:452:4
+   = note: this error originates in the macro `impl_render_in_json_script` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `Json<{integer}>` cannot be spliced into this element body (`Script`)
+  --> tests/warnings-json/raw-text-json-splices.rs:11:27
+   |
+11 |         script type="" { (Json(1)) }
+   |                           ^^^^^^^ not allowed in this `<script>` or `<style>` body
+   |
+   = note: an executable `<script>` only accepts `TrustedScript`, and a `<style>` only accepts `TrustedStyle`
+   = note: to pass data to a script, put it in `script type="application/json" { (Json(..)) }` and read it with `JSON.parse(element.textContent)`
+help: the trait `RenderIn<Script>` is not implemented for `Json<{integer}>`
+      but trait `RenderIn<JsonScript>` is implemented for it
+  --> /workspace/maud/src/json.rs:182:12
+  ::: /workspace/maud/src/json.rs:196:1
+   |
+   = note: in this macro invocation
+   = help: for that trait implementation, expected `JsonScript`, found `Script`
+note: required by a bound in `maud::macro_private::render_in`
+  --> /workspace/maud/src/lib.rs:452:4
+   = note: this error originates in the macro `impl_render_in_json_script` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `Json<{integer}>` cannot be spliced into this element body (`Script`)
+  --> tests/warnings-json/raw-text-json-splices.rs:12:45
+   |
+12 |         script type=("application/json") { (Json(1)) }
+   |                                             ^^^^^^^ not allowed in this `<script>` or `<style>` body
+   |
+   = note: an executable `<script>` only accepts `TrustedScript`, and a `<style>` only accepts `TrustedStyle`
+   = note: to pass data to a script, put it in `script type="application/json" { (Json(..)) }` and read it with `JSON.parse(element.textContent)`
+help: the trait `RenderIn<Script>` is not implemented for `Json<{integer}>`
+      but trait `RenderIn<JsonScript>` is implemented for it
+  --> /workspace/maud/src/json.rs:182:12
+  ::: /workspace/maud/src/json.rs:196:1
+   |
+   = note: in this macro invocation
+   = help: for that trait implementation, expected `JsonScript`, found `Script`
+note: required by a bound in `maud::macro_private::render_in`
+  --> /workspace/maud/src/lib.rs:452:4
+   = note: this error originates in the macro `impl_render_in_json_script` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `Json<{integer}>` cannot be spliced into this element body (`Script`)
+  --> tests/warnings-json/raw-text-json-splices.rs:13:58
+   |
+13 |         script type="application/json; charset=utf-8" { (Json(1)) }
+   |                                                          ^^^^^^^ not allowed in this `<script>` or `<style>` body
+   |
+   = note: an executable `<script>` only accepts `TrustedScript`, and a `<style>` only accepts `TrustedStyle`
+   = note: to pass data to a script, put it in `script type="application/json" { (Json(..)) }` and read it with `JSON.parse(element.textContent)`
+help: the trait `RenderIn<Script>` is not implemented for `Json<{integer}>`
+      but trait `RenderIn<JsonScript>` is implemented for it
+  --> /workspace/maud/src/json.rs:182:12
+  ::: /workspace/maud/src/json.rs:196:1
+   |
+   = note: in this macro invocation
+   = help: for that trait implementation, expected `JsonScript`, found `Script`
+note: required by a bound in `maud::macro_private::render_in`
+  --> /workspace/maud/src/lib.rs:452:4
+   = note: this error originates in the macro `impl_render_in_json_script` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `Json<{integer}>` cannot be spliced into this element body (`Style`)
+  --> tests/warnings-json/raw-text-json-splices.rs:14:18
+   |
+14 |         style { (Json(1)) }
+   |                  ^^^^^^^ not allowed in this `<script>` or `<style>` body
+   |
+   = note: an executable `<script>` only accepts `TrustedScript`, and a `<style>` only accepts `TrustedStyle`
+   = note: to pass data to a script, put it in `script type="application/json" { (Json(..)) }` and read it with `JSON.parse(element.textContent)`
+help: the trait `RenderIn<Style>` is not implemented for `Json<{integer}>`
+      but trait `RenderIn<JsonScript>` is implemented for it
+  --> /workspace/maud/src/json.rs:182:12
+  ::: /workspace/maud/src/json.rs:196:1
+   |
+   = note: in this macro invocation
+   = help: for that trait implementation, expected `JsonScript`, found `Style`
+note: required by a bound in `maud::macro_private::render_in`
+  --> /workspace/maud/src/lib.rs:452:4
+   = note: this error originates in the macro `impl_render_in_json_script` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `String` cannot be spliced into this element body (`JsonScript`)
+  --> tests/warnings-json/raw-text-json-splices.rs:19:43
+   |
+19 |         script type="application/json" { (name) }
+   |                                           ^^^^ not allowed in this `<script>` or `<style>` body
+   |
+   = help: the trait `RenderIn<JsonScript>` is not implemented for `String`
+   = note: an executable `<script>` only accepts `TrustedScript`, and a `<style>` only accepts `TrustedStyle`
+   = note: to pass data to a script, put it in `script type="application/json" { (Json(..)) }` and read it with `JSON.parse(element.textContent)`
+help: the following other types implement trait `RenderIn<C>`
+  --> /workspace/maud/src/json.rs:182:12
+   |
+   = note: `Json<T>`
+   |
+   = note: `serde_json::raw::RawValue`
+   |
+   = note: `serde_json::value::Value`
+  ::: /workspace/maud/src/json.rs:196:1
+   |
+   = note: in this macro invocation
+note: required by a bound in `maud::macro_private::render_in`
+  --> /workspace/maud/src/lib.rs:452:4
+   = note: this error originates in the macro `impl_render_in_json_script` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `TrustedScript` cannot be spliced into this element body (`JsonScript`)
+  --> tests/warnings-json/raw-text-json-splices.rs:20:43
+   |
+20 |         script type="application/json" { (maud::trusted_script!("1")) }
+   |                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^ not allowed in this `<script>` or `<style>` body
+   |
+   = note: an executable `<script>` only accepts `TrustedScript`, and a `<style>` only accepts `TrustedStyle`
+   = note: to pass data to a script, put it in `script type="application/json" { (Json(..)) }` and read it with `JSON.parse(element.textContent)`
+help: the trait `RenderIn<JsonScript>` is not implemented for `TrustedScript`
+      but trait `RenderIn<Script>` is implemented for it
+  --> /workspace/maud/src/ctx.rs:160:8
+  ::: /workspace/maud/src/ctx.rs:174:1
+   |
+   = note: in this macro invocation
+   = help: for that trait implementation, expected `Script`, found `JsonScript`
+note: required by a bound in `maud::macro_private::render_in`
+  --> /workspace/maud/src/lib.rs:452:4
+   = note: this error originates in the macro `trusted_type` (in Nightly builds, run with -Z macro-backtrace for more info)
