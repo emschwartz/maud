@@ -1,0 +1,62 @@
+error[E0080]: evaluation panicked: a trusted script contains `</script` or `<script`, which would end the element early or hide its end tag
+ --> tests/warnings/trusted-forbidden.rs:4:13
+  |
+4 |     let _ = trusted_script!("</script>");
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ evaluation of `main::_` failed inside this call
+  |
+note: inside `maud::macro_private::check_script_const`
+ --> $RUST/core/src/panic.rs
+  |
+  |         $crate::panicking::panic_fmt($crate::const_format_args!($($t)+));
+  |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ --> /workspace/maud/src/lib.rs:547:12
+ ::: /workspace/maud/src/lib.rs:550:13
+  |
+  = note: in this macro invocation
+
+error[E0080]: evaluation panicked: a trusted script contains `</script` or `<script`, which would end the element early or hide its end tag
+ --> tests/warnings/trusted-forbidden.rs:5:13
+  |
+5 |     let _ = trusted_script!(concat!("<!--<scr", "ipt>"));
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ evaluation of `main::_` failed inside this call
+  |
+note: inside `maud::macro_private::check_script_const`
+ --> $RUST/core/src/panic.rs
+  |
+  |         $crate::panicking::panic_fmt($crate::const_format_args!($($t)+));
+  |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ --> /workspace/maud/src/lib.rs:547:12
+ ::: /workspace/maud/src/lib.rs:550:13
+  |
+  = note: in this macro invocation
+
+error[E0080]: evaluation panicked: a trusted style contains `</style`, which would end the element early
+ --> tests/warnings/trusted-forbidden.rs:6:13
+  |
+6 |     let _ = trusted_style!("</style>");
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^ evaluation of `main::_` failed inside this call
+  |
+note: inside `maud::macro_private::check_style_const`
+ --> $RUST/core/src/panic.rs
+  |
+  |         $crate::panicking::panic_fmt($crate::const_format_args!($($t)+));
+  |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ --> /workspace/maud/src/lib.rs:557:12
+  |
+  = note: in this macro invocation
+
+error[E0080]: evaluation panicked: a trusted script contains `</script` or `<script`, which would end the element early or hide its end tag
+ --> tests/warnings/trusted-forbidden.rs:9:17
+  |
+9 |         let _ = trusted_script!("</SCRIPT>");
+  |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ evaluation of `main::_` failed inside this call
+  |
+note: inside `maud::macro_private::check_script_const`
+ --> $RUST/core/src/panic.rs
+  |
+  |         $crate::panicking::panic_fmt($crate::const_format_args!($($t)+));
+  |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ --> /workspace/maud/src/lib.rs:547:12
+ ::: /workspace/maud/src/lib.rs:550:13
+  |
+  = note: in this macro invocation

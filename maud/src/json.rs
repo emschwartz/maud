@@ -57,19 +57,32 @@
 //!
 //! # Examples
 //!
-//! Safely passing a value from the server into a script in the page:
+//! Safely passing a value from the server into a script in the page. The JSON
+//! goes into a data block, which the browser never runs, and the script reads it
+//! from there:
 //!
 //! ```rust
 //! # use maud::{html, json::Json};
 //! let foodstuff = "Fish & Chips";
 //! let rendered = html! {
-//!   script { "console.log(" (Json(foodstuff)) ")" }
+//!   script type="application/json" id="foodstuff" { (Json(foodstuff)) }
+//!   script {
+//!     "const foodstuff = JSON.parse(document.getElementById('foodstuff').textContent);"
+//!     "console.log(foodstuff);"
+//!   }
 //! };
 //! assert_eq!(
-//!   "<script>console.log(\"Fish \\u0026 Chips\")</script>",
+//!   concat!(
+//!     r#"<script type="application/json" id="foodstuff">"Fish \u0026 Chips"</script>"#,
+//!     "<script>const foodstuff = JSON.parse(document.getElementById('foodstuff').textContent);",
+//!     "console.log(foodstuff);</script>",
+//!   ),
 //!   rendered.into_string(),
 //! );
 //! ```
+//!
+//! JSON cannot be spliced into an executable `<script>` directly; see
+//! [`ctx`](crate::ctx) for why.
 //!
 //! Embedding JSON-LD content into a page:
 //!
@@ -97,7 +110,10 @@
 
 use serde::Serialize;
 
-use crate::Render;
+use crate::{
+    Render,
+    ctx::{JsonScript, RenderIn},
+};
 
 /// A wrapper that renders the inner value as HTML-safe JSON.
 ///
@@ -158,6 +174,27 @@ impl Render for serde_json::value::RawValue {
     }
 }
 
+macro_rules! impl_render_in_json_script {
+    ($(impl$([$($generics:tt)*])? for $ty:ty;)*) => {
+        $(
+            impl$(<$($generics)*>)? crate::ctx::sealed::Sealed<JsonScript> for $ty {}
+
+            impl$(<$($generics)*>)? RenderIn<JsonScript> for $ty {
+                /// Appends an HTML-safe JSON representation of `self` to the given buffer.
+                fn render_in(&self, buffer: &mut alloc::string::String) {
+                    self.render_to(buffer);
+                }
+            }
+        )*
+    };
+}
+
+impl_render_in_json_script! {
+    impl[T: Serialize] for Json<T>;
+    impl for serde_json::Value;
+    impl for serde_json::value::RawValue;
+}
+
 /// Appends an HTML-safe JSON representation of `object` to the given buffer.
 fn render_to_buffer<T: Serialize>(object: T, buffer: &mut alloc::string::String) {
     // SAFETY: We trust `serde_json` to produce UTF-8; see also the commentary
@@ -200,6 +237,20 @@ impl serde_json::ser::Formatter for HtmlSafeJsonFormatter {
     {
         write_escaped_fragment(writer, fragment)
     }
+
+    /// Writes a number that is already formatted as a string.
+    ///
+    /// `serde_json` only calls this with its `arbitrary_precision` feature,
+    /// which any crate in the dependency graph can turn on. The string then
+    /// comes from a `Number`, which can be built from unchecked text (or by a
+    /// `Serialize` impl that imitates one), so it gets the same escaping as
+    /// any other fragment.
+    fn write_number_str<W>(&mut self, writer: &mut W, value: &str) -> std::io::Result<()>
+    where
+        W: ?Sized + std::io::Write,
+    {
+        write_escaped_fragment(writer, value)
+    }
 }
 
 /// Writes a JSON fragment to the specified writer.
@@ -232,4 +283,20 @@ where
     }
 
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::HtmlSafeJsonFormatter;
+    use serde_json::ser::Formatter;
+
+    #[test]
+    fn number_str_is_escaped() {
+        // Without `arbitrary_precision` nothing calls this, so call it directly.
+        let mut out = std::vec::Vec::new();
+        HtmlSafeJsonFormatter
+            .write_number_str(&mut out, "1</script><!--&")
+            .unwrap();
+        assert_eq!(out, br"1\u003c/script\u003e\u003c!--\u0026");
+    }
 }

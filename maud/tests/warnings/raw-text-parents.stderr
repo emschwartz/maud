@@ -1,0 +1,79 @@
+error: `script` is not supported inside `textarea`
+ --> tests/warnings/raw-text-parents.rs:5:20
+  |
+5 |         textarea { script { "var s = '</textarea><img src=x onerror=alert(1)>';" } }
+  |                    ^^^^^^
+  |
+  = help: move the `script` outside the `textarea` element
+
+error: `script` is not supported inside `title`
+ --> tests/warnings/raw-text-parents.rs:6:17
+  |
+6 |         title { script { "var s = '</title><img src=x onerror=alert(1)>';" } }
+  |                 ^^^^^^
+  |
+  = help: move the `script` outside the `title` element
+
+error: `style` is not supported inside `textarea`
+ --> tests/warnings/raw-text-parents.rs:7:20
+  |
+7 |         textarea { style { "a::after { content: '</textarea><img src=x onerror=alert(1)>' }" } }
+  |                    ^^^^^
+  |
+  = help: move the `style` outside the `textarea` element
+
+error: `script` is not supported inside `xmp`
+ --> tests/warnings/raw-text-parents.rs:8:15
+  |
+8 |         xmp { script { "var s = '</xmp><img src=x onerror=alert(1)>';" } }
+  |               ^^^^^^
+  |
+  = help: move the `script` outside the `xmp` element
+
+error: `script` is not supported inside `iframe`
+ --> tests/warnings/raw-text-parents.rs:9:18
+  |
+9 |         iframe { script {} }
+  |                  ^^^^^^
+  |
+  = help: move the `script` outside the `iframe` element
+
+error: `style` is not supported inside `noembed`
+  --> tests/warnings/raw-text-parents.rs:10:19
+   |
+10 |         noembed { style {} }
+   |                   ^^^^^
+   |
+   = help: move the `style` outside the `noembed` element
+
+error: `script` is not supported inside `noframes`
+  --> tests/warnings/raw-text-parents.rs:11:20
+   |
+11 |         noframes { script {} }
+   |                    ^^^^^^
+   |
+   = help: move the `script` outside the `noframes` element
+
+error: `script` is not supported inside `plaintext`
+  --> tests/warnings/raw-text-parents.rs:12:21
+   |
+12 |         plaintext { script {} }
+   |                     ^^^^^^
+   |
+   = help: move the `script` outside the `plaintext` element
+
+error: `script` is not supported inside `frameset`
+  --> tests/warnings/raw-text-parents.rs:13:35
+   |
+13 |         html { head {} frameset { script { "var s = '<frame onload=alert(1)>';" } } }
+   |                                   ^^^^^^
+   |
+   = help: move the `script` outside the `frameset` element
+
+error: `script` is not supported inside `textarea`
+  --> tests/warnings/raw-text-parents.rs:14:26
+   |
+14 |         textarea { div { script {} } }
+   |                          ^^^^^^
+   |
+   = help: move the `script` outside the `textarea` element

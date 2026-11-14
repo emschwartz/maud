@@ -1,0 +1,41 @@
+error: elements are not allowed inside `script`
+ --> tests/warnings/raw-text-elements.rs:5:18
+  |
+5 |         script { b { "x" } }
+  |                  ^^^^^^^^^
+  |
+  = note: the browser reads the body of `script` as plain text, not HTML
+
+error: elements are not allowed inside `style`
+ --> tests/warnings/raw-text-elements.rs:6:28
+  |
+6 |         style { @if true { p {} } }
+  |                            ^^^^
+  |
+  = note: the browser reads the body of `style` as plain text, not HTML
+
+error: elements are not allowed inside `script`
+ --> tests/warnings/raw-text-elements.rs:7:39
+  |
+7 |         script type="text/template" { div {} }
+  |                                       ^^^^^^
+  |
+  = note: the browser reads the body of `script` as plain text, not HTML
+
+error: `script` must have a body
+ --> tests/warnings/raw-text-elements.rs:8:28
+  |
+8 |         script src="app.js";
+  |                            ^
+  |
+  = help: replace the `;` with `{}`
+  = note: without a closing `</script>` tag, the browser reads the rest of the page as part of the `script`
+
+error: `style` must have a body
+ --> tests/warnings/raw-text-elements.rs:9:14
+  |
+9 |         style;
+  |              ^
+  |
+  = help: replace the `;` with `{}`
+  = note: without a closing `</style>` tag, the browser reads the rest of the page as part of the `style`

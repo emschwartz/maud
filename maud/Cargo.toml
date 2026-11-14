@@ -41,6 +41,8 @@ serde = { version = "1", optional = true }
 serde_json = { version = "1.0.29", features = ["raw_value"], optional = true }
 
 [dev-dependencies]
+html5ever = "0.40"
+markup5ever_rcdom = "0.40"
 serde = { version = "1", features = ["derive"] }
 trybuild = { version = "1.0.33", features = ["diff"] }
 

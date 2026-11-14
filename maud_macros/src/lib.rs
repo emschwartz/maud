@@ -7,6 +7,7 @@ extern crate proc_macro;
 mod ast;
 mod escape;
 mod generate;
+mod raw_text;
 
 use ast::DiagnosticParse;
 use proc_macro2::{Ident, Span, TokenStream};
@@ -41,10 +42,9 @@ fn expand(input: TokenStream) -> TokenStream {
         }
     };
 
-    let diag_tokens = diagnostics.into_iter().map(Diagnostic::emit_as_expr_tokens);
-
     let output_ident = Ident::new("__maud_output", Span::mixed_site());
-    let stmts = generate::generate(markups, output_ident.clone());
+    let stmts = generate::generate(markups, output_ident.clone(), &mut diagnostics);
+    let diag_tokens = diagnostics.into_iter().map(Diagnostic::emit_as_expr_tokens);
     quote! {{
         extern crate alloc;
         extern crate maud;

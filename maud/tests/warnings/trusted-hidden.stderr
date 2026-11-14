@@ -1,0 +1,35 @@
+error[E0599]: no associated function or constant named `from_const_internal` found for struct `TrustedScript` in the current scope
+ --> tests/warnings/trusted-hidden.rs:6:28
+  |
+6 |     let _ = TrustedScript::from_const_internal(String::leak(user.clone()));
+  |                            ^^^^^^^^^^^^^^^^^^^ associated function or constant not found in `TrustedScript`
+  |
+note: if you're trying to build a new `TrustedScript`, consider using `TrustedScript::assume_trusted` which returns `TrustedScript`
+ --> /workspace/maud/src/ctx.rs:142:12
+ ::: /workspace/maud/src/ctx.rs:174:1
+  |
+  = note: in this macro invocation
+  = note: this error originates in the macro `trusted_type` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0599]: no associated function or constant named `from_const_internal` found for struct `TrustedStyle` in the current scope
+ --> tests/warnings/trusted-hidden.rs:7:27
+  |
+7 |     let _ = TrustedStyle::from_const_internal(String::leak(user.clone()));
+  |                           ^^^^^^^^^^^^^^^^^^^ associated function or constant not found in `TrustedStyle`
+  |
+note: if you're trying to build a new `TrustedStyle`, consider using `TrustedStyle::assume_trusted` which returns `TrustedStyle`
+ --> /workspace/maud/src/ctx.rs:142:12
+ ::: /workspace/maud/src/ctx.rs:182:1
+  |
+  = note: in this macro invocation
+  = note: this error originates in the macro `trusted_type` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0624]: associated function `from_static` is private
+ --> tests/warnings/trusted-hidden.rs:8:28
+  |
+8 |     let _ = TrustedScript::from_static(String::leak(user));
+  |                            ^^^^^^^^^^^ private associated function
+  |
+ --> /workspace/maud/src/ctx.rs:153:12
+  |
+  = note: private associated function defined here
